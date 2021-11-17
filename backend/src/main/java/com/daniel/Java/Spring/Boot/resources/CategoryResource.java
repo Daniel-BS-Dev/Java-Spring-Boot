@@ -1,5 +1,7 @@
 package com.daniel.Java.Spring.Boot.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,13 @@ public class CategoryResource {
 	
 	@Autowired
 	private CategoryService service;
+	
+	
+	@GetMapping
+	private ResponseEntity<List<CategoryDTO>> findAll(){
+		List<CategoryDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
 	
 	@GetMapping(value="/{id}")
 	private ResponseEntity<CategoryDTO> fidById(@PathVariable Integer id){
