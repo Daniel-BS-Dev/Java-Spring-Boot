@@ -26,7 +26,7 @@ public class Product implements Serializable {
 	private String name;
 	private Double price;
 	
-	@JsonBackReference
+
 	@ManyToMany
 	@JoinTable(name = "tb_product_Category",
 	joinColumns = @JoinColumn(name = "product_id"),

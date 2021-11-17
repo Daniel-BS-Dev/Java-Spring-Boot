@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_category")
-public class Category implements Serializable {
+@Table(name="tb_state")
+public class State implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,14 +21,14 @@ public class Category implements Serializable {
 	private Integer id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "categories")
-	List<Product> products = new ArrayList<>();
+	@OneToMany(mappedBy = "state")
+	List<City> cities = new ArrayList<>();
 	
-	public Category() {
+	public State() {
 		
 	}
 	
-	public Category(Integer id, String name) {
+	public State(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,8 +50,8 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public List<City> getProducts() {
+		return cities;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Category implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		State other = (State) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

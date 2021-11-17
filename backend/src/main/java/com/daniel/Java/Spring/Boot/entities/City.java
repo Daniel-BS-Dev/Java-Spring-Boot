@@ -1,19 +1,19 @@
 package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_category")
-public class Category implements Serializable {
+@Table(name="tb_city")
+public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,17 +21,18 @@ public class Category implements Serializable {
 	private Integer id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "categories")
-	List<Product> products = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "id_state")
+	private State state;
 	
-	public Category() {
+	public City() {
 		
 	}
 	
-	public Category(Integer id, String name) {
-		super();
+	public City(Integer id, String name, State state) {
 		this.id = id;
 		this.name = name;
+		this.state = state;
 	}
 
 	public Integer getId() {
@@ -50,8 +51,12 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 
 	@Override
@@ -70,7 +75,7 @@ public class Category implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		City other = (City) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
