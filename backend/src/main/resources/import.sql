@@ -16,3 +16,21 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (3,2);
 
 INSERT INTO tb_product (name, price) VALUES ('Corola', 109.000);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (4,2);
+
+
+INSERT INTO tb_state (name) VALUES ('São Paulo');
+INSERT INTO tb_city (name, id_state) VALUES ('Campinas', 1);
+
+INSERT INTO tb_state (name) VALUES ('Pernambuco');
+INSERT INTO tb_city (name, id_state) VALUES ('Tupanatinga', 2);
+
+INSERT INTO tb_state (name) VALUES ('Minas Gerais');
+INSERT INTO tb_city (name, id_state) VALUES ('Hamburgo', 3);
+
+INSERT INTO tb_state (name) VALUES ('Para');
+INSERT INTO tb_city (name, id_state) VALUES ('Cataraga', 4);
+
+INSERT INTO tb_state (name) VALUES ('Santa Catarina');
+INSERT INTO tb_city (name, id_state) VALUES ('Rio Belo', 5);
+
+
