@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.daniel.Java.Spring.Boot.dto.CategoryDTO;
 import com.daniel.Java.Spring.Boot.entities.Category;
 import com.daniel.Java.Spring.Boot.repositories.CategoryRepository;
+import com.daniel.Java.Spring.Boot.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CategoryService {
@@ -28,7 +29,7 @@ public class CategoryService {
 	@Transactional(readOnly=true)
 	public CategoryDTO findById(Integer id) {
 		Optional<Category> obj = repository.findById(id);
-		Category entity = obj.get();
+		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
 		return new CategoryDTO(entity);
 	}
 
