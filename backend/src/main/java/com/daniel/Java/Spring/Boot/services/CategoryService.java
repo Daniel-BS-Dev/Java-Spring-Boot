@@ -30,7 +30,7 @@ public class CategoryService {
 	public CategoryDTO findById(Integer id) {
 		Optional<Category> obj = repository.findById(id);
 		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
-		return new CategoryDTO(entity);
+		return new CategoryDTO(entity, entity.getProducts());
 	}
 
 	

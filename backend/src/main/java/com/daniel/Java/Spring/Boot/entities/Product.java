@@ -1,7 +1,8 @@
 package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="tb_product")
@@ -26,12 +25,11 @@ public class Product implements Serializable {
 	private String name;
 	private Double price;
 	
-
 	@ManyToMany
-	@JoinTable(name = "tb_product_Category",
+	@JoinTable(name = "tb_product_category",
 	joinColumns = @JoinColumn(name = "product_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
-	Set<Category> categories = new HashSet<>();
+	List<Category> categories = new ArrayList<>();
 	
 	public Product() {
 		
@@ -68,7 +66,7 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 	
-	public Set<Category> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 

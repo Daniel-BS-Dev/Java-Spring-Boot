@@ -7,31 +7,25 @@ import java.util.List;
 import com.daniel.Java.Spring.Boot.entities.Category;
 import com.daniel.Java.Spring.Boot.entities.Product;
 
-public class CategoryDTO implements Serializable {
+public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
+	private Double price;
 	
-	List<ProductDTO> product = new ArrayList<>();
-	
-	public CategoryDTO() {
+	public ProductDTO() {
 		
 	}
 	
-	public CategoryDTO(String name) {
+	public ProductDTO(String name, Double price) {
 		this.name=name;
+		this.price=price;
 	}
 	
-	public CategoryDTO(Category entity) {
+	public ProductDTO(Product entity) {
 		name = entity.getName();
+		price = entity.getPrice();
 	}
-	
-	public CategoryDTO(Category entity, List<Product> product) {
-	    this(entity);
-	    product.forEach(x -> this.product.add(new ProductDTO(x)));	
-		
-	}
-
 
 	public String getName() {
 		return name;
@@ -41,10 +35,15 @@ public class CategoryDTO implements Serializable {
 		this.name = name;
 	}
 
-	public List<ProductDTO> getProduct() {
-		return product;
+	public Double getPrice() {
+		return price;
 	}
 
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	
 
 
 }
