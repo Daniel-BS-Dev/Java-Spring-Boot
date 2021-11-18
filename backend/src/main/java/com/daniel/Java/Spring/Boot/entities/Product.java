@@ -2,6 +2,7 @@ package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,9 @@ public class Product implements Serializable {
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	List<Category> categories = new ArrayList<>();
 	
+	@OneToMany(mappedBy="id.product")
+	Set<ItemOrder> items = new HashSet<>();
+	
 	public Product() {
 		
 	}
@@ -40,6 +45,15 @@ public class Product implements Serializable {
 		this.name = name;
 		this.price = price;
 	}
+	
+	//metodo da pk, vare uma lista de pedido e monto uma lista de pedidos associados a ele
+		public List<Order> getOrder(){
+			List<Order> list = new ArrayList<>();
+			for(ItemOrder x : items) {
+				list.add(x.getOrder());
+			}
+			return list;
+		}
 
 	public Integer getId() {
 		return id;
@@ -68,6 +82,10 @@ public class Product implements Serializable {
 	
 	public List<Category> getCategories() {
 		return categories;
+	}
+
+	public Set<ItemOrder> getOrders() {
+		return items;
 	}
 
 	@Override

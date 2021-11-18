@@ -2,6 +2,8 @@ package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,6 +39,9 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address deliveryAddress;
+	
+	@OneToMany(mappedBy = "id.order")
+	Set<ItemOrder> product = new HashSet<>();
 	
 	public Order() {
 		
@@ -87,6 +93,10 @@ public class Order implements Serializable {
 
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+	
+	public Set<ItemOrder> getProduct() {
+		return product;
 	}
 
 	@Override
