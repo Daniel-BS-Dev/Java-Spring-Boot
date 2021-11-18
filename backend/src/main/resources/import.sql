@@ -44,7 +44,7 @@ INSERT INTO tb_payment (order_id, state) VALUES (2, 1);
 INSERT INTO tb_payment_with_card (number_of_installments, order_id) VALUES (2, 1);
 
 
-
+INSERT INTO tb_item_order (order_id, product_id, description, quantity, price) VALUES (1, 1, 'essa pizza é a melhor de todas', 2, 49.90);
 
 
 
