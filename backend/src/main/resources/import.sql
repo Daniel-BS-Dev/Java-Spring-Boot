@@ -35,3 +35,28 @@ INSERT INTO tb_phone (client_id, phones) VALUES (1, '19981020135');
 INSERT INTO tb_address (cep, complement, district, logarant, number, city_id, client_id) VALUES ('12353-123', 'casa', 'Jardim São João', 634, '12343', 1, 1);
 
 
+INSERT INTO tb_order (date, client_id, Address_id) VALUES (TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 1, 1);
+INSERT INTO tb_payment (order_id, state) VALUES (1, 2);
+INSERT INTO tb_payment_with_bank_slip (due_date, pay_date, order_id) VALUES (TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 1);
+
+INSERT INTO tb_order (date, client_id, Address_id) VALUES (TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 1, 1);
+INSERT INTO tb_payment (order_id, state) VALUES (2, 1);
+INSERT INTO tb_payment_with_card (number_of_installments, order_id) VALUES (2, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
