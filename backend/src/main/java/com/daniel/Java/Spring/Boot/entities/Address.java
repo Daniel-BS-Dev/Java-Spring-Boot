@@ -1,41 +1,54 @@
 package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_category")
+@Table(name="tb_address")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String logarant;
+	private Integer number;
+	private String complement;
+	private String district;
+	private String cep;
 	
-	@ManyToMany(mappedBy = "categories")
-	List<Product> products = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="client_id")
+	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name="city_id")
+	private City city;
 	
 	public Address() {
 		
 	}
 	
-	public Address(Integer id, String name) {
-		super();
+	public Address(Integer id, String logarant, Integer number, String complement, String district, String cep,
+			Client client, City city) {
 		this.id = id;
-		this.name = name;
+		this.logarant = logarant;
+		this.number = number;
+		this.complement = complement;
+		this.district = district;
+		this.cep = cep;
+		this.client = client;
+		this.city = city;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -45,16 +58,60 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getLogarant() {
+		return logarant;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLogarant(String logarant) {
+		this.logarant = logarant;
 	}
-	
-	public List<Product> getProducts() {
-		return products;
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	@Override

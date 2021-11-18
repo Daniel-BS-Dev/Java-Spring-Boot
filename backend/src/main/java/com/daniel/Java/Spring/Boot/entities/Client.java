@@ -2,13 +2,17 @@ package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.daniel.Java.Spring.Boot.enums.TypeClient;
@@ -24,8 +28,14 @@ public class Client implements Serializable {
 	private String name;
 	private String email;
 	private String cpfOrCnpj;
-	private TypeClient type;
+	private Integer type; // o meu tipo sera passado como integer
 	
+	@OneToMany(mappedBy="client")
+	private List<Address> address = new ArrayList<>();
+	
+	@ElementCollection //anotação para representar entidade fraca
+	@CollectionTable(name = "tb_phone") // nome da minha tabela telefone
+	private Set<String> phones = new HashSet<>();
 	
 	public Client() {
 		
@@ -36,7 +46,7 @@ public class Client implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.cpfOrCnpj = cpfOrCnpj;
-		this.type = type;
+		this.type = type.getCode();// pegando so o numero
 	}
 
 
@@ -74,12 +84,22 @@ public class Client implements Serializable {
 	}
 
 	public TypeClient getType() {
-		return type;
+		return TypeClient.toEnum(type);
 	}
 
 	public void setType(TypeClient type) {
-		this.type = type;
+		this.type = type.getCode();
 	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+	
+	public Set<String> getPhones() {
+		return phones;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {

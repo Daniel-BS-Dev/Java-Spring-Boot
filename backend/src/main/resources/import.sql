@@ -30,4 +30,8 @@ INSERT INTO tb_city (name, id_state) VALUES ('Cataraga', 4);
 INSERT INTO tb_state (name) VALUES ('Santa Catarina');
 INSERT INTO tb_city (name, id_state) VALUES ('Rio Belo', 5);
 
+INSERT INTO tb_client (cpf_or_cnpj, email, name, type) VALUES ('120030114576', 'daniel@mail.com', 'daniel', 1);
+INSERT INTO tb_phone (client_id, phones) VALUES (1, '19981020135');
+INSERT INTO tb_address (cep, complement, district, logarant, number, city_id, client_id) VALUES ('12353-123', 'casa', 'Jardim São João', 634, '12343', 1, 1);
+
 
