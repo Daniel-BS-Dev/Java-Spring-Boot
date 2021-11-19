@@ -1,16 +1,21 @@
 package com.daniel.Java.Spring.Boot.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.daniel.Java.Spring.Boot.entities.Category;
-import com.daniel.Java.Spring.Boot.entities.Product;
+
 
 public class CategoryAllDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
+	
+	@NotBlank(message = "Preenchimento obrigatoro")
+	@Length(min=5, max=80, message="Tamanho deve ser enter 5 e 80 caracteres")
 	private String name;
 	
 	public CategoryAllDTO() {

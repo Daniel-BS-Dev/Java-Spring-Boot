@@ -3,6 +3,8 @@ package com.daniel.Java.Spring.Boot.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -60,7 +62,7 @@ public class CategoryResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto){
+	public ResponseEntity<CategoryAllDTO> insert(@Valid @RequestBody CategoryAllDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				  .buildAndExpand(dto.getId()).toUri();
@@ -69,7 +71,7 @@ public class CategoryResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
+	public ResponseEntity<CategoryAllDTO> update(@Valid @PathVariable Long id, @RequestBody CategoryAllDTO dto){
 		  dto = service.update(id, dto);
 		  return ResponseEntity.ok().body(dto);
 	}

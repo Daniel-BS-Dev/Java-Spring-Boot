@@ -45,19 +45,19 @@ public class CategoryService {
 	}
 
 	@Transactional
-	public CategoryDTO insert(CategoryDTO dto) {
+	public CategoryAllDTO insert(CategoryAllDTO dto) {
 	    Category entity = new Category();
 	    entity.setName(dto.getName());
 	    entity = repository.save(entity);
-		return new CategoryDTO(entity);
+		return new CategoryAllDTO(entity);
 	}
 
-	public CategoryDTO update(Long id, CategoryDTO dto) {
+	public CategoryAllDTO update(Long id, CategoryAllDTO dto) {
 		Optional<Category> obj = repository.findById(id);
 		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
 		entity.setName(dto.getName());
 		entity = repository.save(entity);
-		return new CategoryDTO(entity);
+		return new CategoryAllDTO(entity);
 	}
 
 	public void deleteById(Long id) {
