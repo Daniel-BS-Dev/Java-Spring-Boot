@@ -10,6 +10,7 @@ import com.daniel.Java.Spring.Boot.entities.Product;
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private Long id;
 	private String name;
 	private Double price;
 	
@@ -17,14 +18,24 @@ public class ProductDTO implements Serializable {
 		
 	}
 	
-	public ProductDTO(String name, Double price) {
+	public ProductDTO(Long id, String name, Double price) {
+		this.id = id;
 		this.name=name;
 		this.price=price;
 	}
 	
 	public ProductDTO(Product entity) {
+		id = entity.getId();
 		name = entity.getName();
 		price = entity.getPrice();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

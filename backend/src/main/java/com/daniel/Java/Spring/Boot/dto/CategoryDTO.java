@@ -10,6 +10,7 @@ import com.daniel.Java.Spring.Boot.entities.Product;
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private Long id;
 	private String name;
 	
 	List<ProductDTO> product = new ArrayList<>();
@@ -18,12 +19,14 @@ public class CategoryDTO implements Serializable {
 		
 	}
 	
-	public CategoryDTO(String name) {
+	public CategoryDTO(Long id, String name) {
 		this.name=name;
+		this.id = id;
 	}
 	
 	public CategoryDTO(Category entity) {
 		name = entity.getName();
+		id = entity.getId();
 	}
 	
 	public CategoryDTO(Category entity, List<Product> product) {
@@ -39,6 +42,14 @@ public class CategoryDTO implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public List<ProductDTO> getProduct() {

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.daniel.Java.Spring.Boot.dto.CategoryDTO;
+import com.daniel.Java.Spring.Boot.dto.ProductDTO;
 import com.daniel.Java.Spring.Boot.entities.Category;
+import com.daniel.Java.Spring.Boot.entities.Product;
 import com.daniel.Java.Spring.Boot.repositories.CategoryRepository;
+import com.daniel.Java.Spring.Boot.repositories.ProductRepository;
 import com.daniel.Java.Spring.Boot.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -20,6 +23,9 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
+	@Autowired
+	private ProductRepository product;
+	
 	@Transactional(readOnly=true)
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll(Sort.by("name"));
@@ -27,10 +33,18 @@ public class CategoryService {
 	}
 
 	@Transactional(readOnly=true)
-	public CategoryDTO findById(Integer id) {
+	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
 		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
 		return new CategoryDTO(entity, entity.getProducts());
+	}
+
+	@Transactional
+	public CategoryDTO insert(CategoryDTO dto) {
+	    Category entity = new Category();
+	    entity.setName(dto.getName());
+	    entity = repository.save(entity);
+		return new CategoryDTO(entity);
 	}
 
 	
