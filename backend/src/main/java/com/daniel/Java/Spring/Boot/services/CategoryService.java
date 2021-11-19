@@ -23,9 +23,6 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
-	@Autowired
-	private ProductRepository product;
-	
 	@Transactional(readOnly=true)
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll(Sort.by("name"));
@@ -44,6 +41,14 @@ public class CategoryService {
 	    Category entity = new Category();
 	    entity.setName(dto.getName());
 	    entity = repository.save(entity);
+		return new CategoryDTO(entity);
+	}
+
+	public CategoryDTO update(Long id, CategoryDTO dto) {
+		Optional<Category> obj = repository.findById(id);
+		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
 		return new CategoryDTO(entity);
 	}
 
