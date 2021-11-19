@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.daniel.Java.Spring.Boot.dto.CategoryAllDTO;
 import com.daniel.Java.Spring.Boot.dto.CategoryDTO;
 import com.daniel.Java.Spring.Boot.services.CategoryService;
 
@@ -28,8 +29,8 @@ public class CategoryResource {
 	
 	
 	@GetMapping
-	private ResponseEntity<List<CategoryDTO>> findAll(){
-		List<CategoryDTO> list = service.findAll();
+	private ResponseEntity<List<CategoryAllDTO>> findAll(){
+		List<CategoryAllDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	

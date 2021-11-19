@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.daniel.Java.Spring.Boot.dto.CategoryAllDTO;
 import com.daniel.Java.Spring.Boot.dto.CategoryDTO;
 import com.daniel.Java.Spring.Boot.entities.Category;
 import com.daniel.Java.Spring.Boot.repositories.CategoryRepository;
@@ -24,9 +25,9 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly=true)
-	public List<CategoryDTO> findAll() {
+	public List<CategoryAllDTO> findAll() {
 		List<Category> list = repository.findAll(Sort.by("name"));
-		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+		return list.stream().map(x -> new CategoryAllDTO(x)).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly=true)
@@ -60,7 +61,7 @@ public class CategoryService {
 			throw new ResourceNotFoundException("id not foud "+id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DatabaseException("Integrity violation");
+			throw new DatabaseException("Entity can not be delete beacause it is linked with product");
 		}
 		
 	}
