@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.daniel.Java.Spring.Boot.dto.ClientAllDTO;
 import com.daniel.Java.Spring.Boot.dto.ClientDTO;
 import com.daniel.Java.Spring.Boot.dto.ClientInsertDTO;
+import com.daniel.Java.Spring.Boot.dto.ClientUpadateDTO;
 import com.daniel.Java.Spring.Boot.services.ClientService;
 
 @RestController
@@ -71,7 +72,7 @@ public class ClientResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ClientInsertDTO> update(@Valid @PathVariable Integer id, @RequestBody ClientInsertDTO dto){
+	public ResponseEntity<ClientUpadateDTO> update(@Valid @PathVariable Integer id, @RequestBody ClientUpadateDTO dto){
 		  dto = service.update(id, dto);
 		  return ResponseEntity.ok().body(dto);
 	}

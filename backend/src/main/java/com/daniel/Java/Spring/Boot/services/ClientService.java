@@ -16,8 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.daniel.Java.Spring.Boot.dto.ClientAllDTO;
 import com.daniel.Java.Spring.Boot.dto.ClientDTO;
 import com.daniel.Java.Spring.Boot.dto.ClientInsertDTO;
+import com.daniel.Java.Spring.Boot.dto.ClientUpadateDTO;
+import com.daniel.Java.Spring.Boot.entities.Address;
+import com.daniel.Java.Spring.Boot.entities.City;
 import com.daniel.Java.Spring.Boot.entities.Client;
 import com.daniel.Java.Spring.Boot.enums.TypeClient;
+import com.daniel.Java.Spring.Boot.repositories.AddressRepository;
+import com.daniel.Java.Spring.Boot.repositories.CityRepository;
 import com.daniel.Java.Spring.Boot.repositories.ClientRepository;
 import com.daniel.Java.Spring.Boot.services.exceptions.DatabaseException;
 import com.daniel.Java.Spring.Boot.services.exceptions.ResourceNotFoundException;
@@ -27,6 +32,12 @@ public class ClientService {
 	
 	@Autowired
 	private ClientRepository repository;
+	
+	@Autowired
+	private CityRepository cityRepository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 	
 
 	@Transactional(readOnly=true)
@@ -51,18 +62,18 @@ public class ClientService {
 	@Transactional
 	public ClientInsertDTO insert(ClientInsertDTO dto) {
 	    Client entity = new Client();
-	    copyEntity(entity, dto);
+	    insertEntity(entity, dto);
 	    entity = repository.save(entity);
-		return new ClientInsertDTO(entity);
+	    return new ClientInsertDTO(entity);
 	}
 
 	@Transactional
-	public ClientInsertDTO update(Integer id, ClientInsertDTO dto) {
+	public ClientUpadateDTO update(Integer id, ClientUpadateDTO dto) {
 		Optional<Client> obj = repository.findById(id);
 		Client entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
-		copyEntity(entity, dto);
+		updateEntity(entity, dto);
 		entity = repository.save(entity);
-		return new ClientInsertDTO(entity);
+		return new ClientUpadateDTO(entity);
 	}
 
 	public void deleteById(Integer id) {
@@ -78,7 +89,7 @@ public class ClientService {
 		
 	}
 	
-	private void copyEntity(Client entity, ClientInsertDTO dto) {
+	private void updateEntity(Client entity, ClientUpadateDTO dto) {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setCpfOrCnpj(dto.getCpfOrCnpj());
@@ -86,6 +97,31 @@ public class ClientService {
 		
 	}
 
+	private void insertEntity(Client entity, ClientInsertDTO dto) {
+		
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		entity.setCpfOrCnpj(dto.getCpfOrCnpj());
+		entity.setType(TypeClient.toEnum(dto.getType()));
+		entity.getPhones().add(dto.getPhone());
+		
+	    Address address = new Address();
+	   
+		address.setLogarant(dto.getLogarant());
+		address.setNumber(dto.getNumber());
+		address.setComplement(dto.getComplement());
+		address.setDistrict(dto.getDistrict());
+		address.setCep(dto.getCep());
+		address.setClient(entity);
+			
+		Optional<City> obj = cityRepository.findById(dto.getCity());
+		City city = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
+		address.setCity(city);
+			
+		address = addressRepository.save(address);
 	
+		//entity.getAddress().add(address);
+	
+	}
 
 }
