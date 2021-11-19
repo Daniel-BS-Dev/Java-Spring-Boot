@@ -26,6 +26,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
+	@Transactional(readOnly=true)
 	public Page<CategoryAllDTO> findPage(PageRequest pageRequest) {
 		Page<Category> page = repository.findAll(pageRequest);
 		return page.map(x -> new CategoryAllDTO(x));
@@ -52,6 +53,7 @@ public class CategoryService {
 		return new CategoryAllDTO(entity);
 	}
 
+	@Transactional
 	public CategoryAllDTO update(Long id, CategoryAllDTO dto) {
 		Optional<Category> obj = repository.findById(id);
 		Category entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));

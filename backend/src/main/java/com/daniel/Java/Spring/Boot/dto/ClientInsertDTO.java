@@ -5,23 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.daniel.Java.Spring.Boot.entities.Address;
 import com.daniel.Java.Spring.Boot.entities.Client;
 
-public class ClientDTO implements Serializable {
+public class ClientInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotBlank(message = "Preenchimento obrigatoro")
+	@Length(min=2, max=50, message="Tamanho deve ser enter 2 e 50 caracteres")
 	private String name;
+	
+	@NotBlank(message = "Preenchimento obrigatoro")
+	@Email(message = "Email invalido")
 	private String email;
+	
+	@NotBlank(message = "Preenchimento obrigatoro")
 	private String cpfOrCnpj;
 	private Integer type; 
 
-	private List<AddressDTO> address = new ArrayList<>();
-	
-	private List<String> phones = new ArrayList<>();
-
-	public ClientDTO(Integer id, String name, String email, String cpfOrCnpj, Integer type) {
+	public ClientInsertDTO(Integer id, String name, String email, String cpfOrCnpj, Integer type) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -29,19 +38,12 @@ public class ClientDTO implements Serializable {
 		this.type = type;
 	}
 	
-	public ClientDTO(Client entity) {
+	public ClientInsertDTO(Client entity) {
 		id = entity.getId();
 		name = entity.getName();
 		email = entity.getEmail();
 		cpfOrCnpj = entity.getCpfOrCnpj();
 		type = entity.getType().getCode();
-	}
-	
-	public ClientDTO(Client entity, List<Address> list, Set<String> set) {
-		this(entity);
-		list.forEach(x -> this.address.add(new AddressDTO(x)));
-		set.forEach(x -> this.phones.add(x));
-		
 	}
 	
 	public Integer getId() {
@@ -84,15 +86,5 @@ public class ClientDTO implements Serializable {
 		this.type = type;
 	}
 
-	public List<AddressDTO> getAddress() {
-		return address;
-	}
-
-	public List<String> getPhones() {
-		return phones;
-	}
-	
-	
-	
 
 }
