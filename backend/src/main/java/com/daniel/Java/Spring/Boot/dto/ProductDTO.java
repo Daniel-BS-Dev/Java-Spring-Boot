@@ -54,7 +54,4 @@ public class ProductDTO implements Serializable {
 		this.price = price;
 	}
 
-	
-
-
 }

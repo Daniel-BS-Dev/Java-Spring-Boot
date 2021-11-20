@@ -8,4 +8,6 @@ import com.daniel.Java.Spring.Boot.entities.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+	
+
 }
