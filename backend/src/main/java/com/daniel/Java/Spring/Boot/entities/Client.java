@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Client implements Serializable {
 	private String cpfOrCnpj;
 	private Integer type; // o meu tipo sera passado como integer
 	
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client", cascade = CascadeType.ALL) // casacade -> eu posso apagar o client e também os seu endereço
 	private List<Address> address = new ArrayList<>();
 	
 	@ElementCollection //anotação para representar entidade fraca
@@ -51,9 +52,7 @@ public class Client implements Serializable {
 		this.cpfOrCnpj = cpfOrCnpj;
 		this.type = type.getCode();// pegando so o numero
 	}
-
-
-
+	
 	public Integer getId() {
 		return id;
 	}

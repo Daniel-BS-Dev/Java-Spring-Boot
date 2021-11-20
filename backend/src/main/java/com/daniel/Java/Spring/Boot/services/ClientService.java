@@ -120,7 +120,7 @@ public class ClientService {
 			
 		address = addressRepository.save(address);
 	
-		//entity.getAddress().add(address);
+		entity.getAddress().add(address);
 	
 	}
 

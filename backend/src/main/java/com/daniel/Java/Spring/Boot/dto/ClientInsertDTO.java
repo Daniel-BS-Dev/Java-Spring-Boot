@@ -2,6 +2,11 @@ package com.daniel.Java.Spring.Boot.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
 import com.daniel.Java.Spring.Boot.entities.Address;
 import com.daniel.Java.Spring.Boot.entities.Client;
 
@@ -9,19 +14,37 @@ public class ClientInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
     private Integer id;
+    
+    @NotBlank(message="Esse campo é obrigatorio")
 	private String name;
+    
+    @NotBlank(message="Esse campo é obrigatorio")
+    @Email(message= "Email invalido")
 	private String email;
+    
+    @NotBlank(message="Esse campo é obrigatorio")
+    @PositiveOrZero(message = "So aceita numeros positivo ou 0")
 	private String cpfOrCnpj;
 	private Integer type;
-
 	private String logarant;
+	
+	@NotNull(message="Esse campo é obrigatorio")
+	@PositiveOrZero(message = "So aceita numeros positivo ou 0")
 	private Integer number;
+	
+	@NotBlank(message="Esse campo é obrigatorio")
 	private String complement;
+	
+	@NotBlank(message="Esse campo é obrigatorio")
 	private String district;
 	
+	@NotBlank(message="Esse campo é obrigatorio")
+	@PositiveOrZero(message = "So aceita numeros positivo ou 0")
 	private String phone;
 	
 	private Integer city;
+	
+	@PositiveOrZero(message = "So aceita numeros positivo ou 0")
 	private String cep;
 	
 	
