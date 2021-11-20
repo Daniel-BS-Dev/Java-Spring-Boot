@@ -9,7 +9,9 @@ import javax.validation.constraints.PositiveOrZero;
 
 import com.daniel.Java.Spring.Boot.entities.Address;
 import com.daniel.Java.Spring.Boot.entities.Client;
+import com.daniel.Java.Spring.Boot.services.validation.ClientInsertValid;
 
+@ClientInsertValid
 public class ClientInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
