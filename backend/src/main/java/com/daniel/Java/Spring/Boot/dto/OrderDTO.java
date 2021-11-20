@@ -2,9 +2,13 @@ package com.daniel.Java.Spring.Boot.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import com.daniel.Java.Spring.Boot.entities.Address;
 import com.daniel.Java.Spring.Boot.entities.Client;
+import com.daniel.Java.Spring.Boot.entities.ItemOrder;
 import com.daniel.Java.Spring.Boot.entities.Order;
 import com.daniel.Java.Spring.Boot.entities.Payment;
 import com.daniel.Java.Spring.Boot.enums.StatePayment;
@@ -16,6 +20,8 @@ public class OrderDTO implements Serializable {
 	private String client;
 	private StatePayment payment;
 	private Integer deliveryAddress;
+	
+	List<ItemOrderDTO> products = new ArrayList<>();
 	
 	
 	public OrderDTO(Instant date, Client client, Payment payment, Address deliveryAddress) {
@@ -30,6 +36,11 @@ public class OrderDTO implements Serializable {
 		client = entity.getClient().getName();
 		payment = entity.getPayment().getState();
 		deliveryAddress = entity.getDeliveryAddress().getNumber();
+	}
+	
+	public OrderDTO(Order entity, Set<ItemOrder> products) {
+	   this(entity);
+	   products.forEach(x -> this.products.add(new ItemOrderDTO(x)));
 	}
 
 	public Instant getDate() {

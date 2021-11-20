@@ -15,7 +15,7 @@ public class ItemOrder implements Serializable {
 	
 	@EmbeddedId
 	private ItemOrderPk id = new ItemOrderPk();
-	private String description;
+	private Double discount;
 	private Integer quantity;
 	private Double price;
 	
@@ -23,10 +23,10 @@ public class ItemOrder implements Serializable {
 		
 	}
 
-	public ItemOrder(Order order, Product product, String description, Integer quantity, Double price) {
+	public ItemOrder(Order order, Product product, Double discount, Integer quantity, Double price) {
 		id.setOrder(order);
 		id.setProduct(product);
-		this.description = description;
+		this.discount = discount;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -47,12 +47,12 @@ public class ItemOrder implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public Double getDiscount() {
+		return discount;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDiscount(Double description) {
+		this.discount = description;
 	}
 
 	public Integer getQuantity() {

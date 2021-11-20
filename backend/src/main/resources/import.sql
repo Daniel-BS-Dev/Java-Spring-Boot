@@ -73,8 +73,13 @@ INSERT INTO tb_order (date, client_id, Address_id) VALUES (TIMESTAMP WITH TIME Z
 INSERT INTO tb_payment (order_id, state) VALUES (2, 1);
 INSERT INTO tb_payment_with_card (number_of_installments, order_id) VALUES (2, 1);
 
+INSERT INTO tb_order (date, client_id, Address_id) VALUES (TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 1, 1);
+INSERT INTO tb_payment (order_id, state) VALUES (3, 1);
+INSERT INTO tb_payment_with_card (number_of_installments, order_id) VALUES (2, 3);
 
-INSERT INTO tb_item_order (order_id, product_id, description, quantity, price) VALUES (1, 1, 'essa pizza é a melhor de todas', 2, 49.90);
+
+INSERT INTO tb_item_order (order_id, product_id, discount, quantity, price) VALUES (1, 1, 0.0 , 2, 49.90);
+
 
 
 

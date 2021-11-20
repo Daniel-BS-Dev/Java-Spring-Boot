@@ -41,7 +41,7 @@ public class Order implements Serializable {
 	private Address deliveryAddress;
 	
 	@OneToMany(mappedBy = "id.order")
-	Set<ItemOrder> product = new HashSet<>();
+	Set<ItemOrder> itemOrder = new HashSet<>();
 	
 	public Order() {
 		
@@ -95,8 +95,8 @@ public class Order implements Serializable {
 		this.deliveryAddress = deliveryAddress;
 	}
 	
-	public Set<ItemOrder> getProduct() {
-		return product;
+	public Set<ItemOrder> getItemOrder() {
+		return itemOrder;
 	}
 
 	@Override

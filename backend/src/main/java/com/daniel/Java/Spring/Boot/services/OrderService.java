@@ -30,7 +30,7 @@ public class OrderService {
 	public OrderDTO findById(Integer id) {
 		Optional<Order> obj = repository.findById(id);
 		Order entity = obj.orElseThrow(()  -> new ResourceNotFoundException("Id does not exist"));
-		return new OrderDTO(entity);
+		return new OrderDTO(entity, entity.getItemOrder());
 	}
 
 	
