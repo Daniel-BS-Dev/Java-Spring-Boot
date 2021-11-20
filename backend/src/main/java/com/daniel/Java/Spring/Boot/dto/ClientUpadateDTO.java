@@ -1,18 +1,16 @@
 package com.daniel.Java.Spring.Boot.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.daniel.Java.Spring.Boot.entities.Address;
 import com.daniel.Java.Spring.Boot.entities.Client;
+import com.daniel.Java.Spring.Boot.services.validation.ClientUpadateValid;
 
+@ClientUpadateValid
 public class ClientUpadateDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -26,15 +24,12 @@ public class ClientUpadateDTO implements Serializable {
 	@Email(message = "Email invalido")
 	private String email;
 	
-	@NotBlank(message = "Preenchimento obrigatoro")
-	private String cpfOrCnpj;
 	private Integer type; 
 
-	public ClientUpadateDTO(Integer id, String name, String email, String cpfOrCnpj, Integer type) {
+	public ClientUpadateDTO(Integer id, String name, String email, Integer type) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.cpfOrCnpj = cpfOrCnpj;
 		this.type = type;
 	}
 	
@@ -42,7 +37,6 @@ public class ClientUpadateDTO implements Serializable {
 		id = entity.getId();
 		name = entity.getName();
 		email = entity.getEmail();
-		cpfOrCnpj = entity.getCpfOrCnpj();
 		type = entity.getType().getCode();
 	}
 	
@@ -68,14 +62,6 @@ public class ClientUpadateDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCpfOrCnpj() {
-		return cpfOrCnpj;
-	}
-
-	public void setCpfOrCnpj(String cpfOrCnpj) {
-		this.cpfOrCnpj = cpfOrCnpj;
 	}
 
 	public Integer getType() {

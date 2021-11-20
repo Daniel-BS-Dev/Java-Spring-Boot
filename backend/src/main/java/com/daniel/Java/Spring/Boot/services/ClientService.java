@@ -92,7 +92,6 @@ public class ClientService {
 	private void updateEntity(Client entity, ClientUpadateDTO dto) {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
-		entity.setCpfOrCnpj(dto.getCpfOrCnpj());
 		entity.setType(TypeClient.toEnum(dto.getType()));
 		
 	}
