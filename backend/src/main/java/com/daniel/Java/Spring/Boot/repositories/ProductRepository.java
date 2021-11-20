@@ -15,9 +15,8 @@ import com.daniel.Java.Spring.Boot.entities.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	//@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cat WHERE obj.name LIKE %:name% AND cat IN :categories")
-	//Page<Product> search(@Param("name") String name, @Param("categories") List<Category> categories, Pageable page);
+	@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cat WHERE obj.name LIKE %:name% AND cat IN :categories")
+	Page<Product> search(@Param("name") String name, @Param("categories") List<Category> categories, Pageable page);
  
-Page<Product> findDistinctByNomeContainingAndCategoriasIn(String name, List<Category> categories, Pageable page);
 
 }

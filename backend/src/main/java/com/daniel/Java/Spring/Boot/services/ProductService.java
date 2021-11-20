@@ -28,7 +28,7 @@ public class ProductService {
 	@Transactional(readOnly=true)
 	public Page<Product> search(String name, List<Long> ids, PageRequest page) {
 		List<Category> categories = categoryRepository.findAllById(ids);
-		return repository.findDistinctByNomeContainingAndCategoriasIn(name, categories, page);
+		return repository.search(name, categories, page);
 	}
 
 	@Transactional(readOnly=true)
