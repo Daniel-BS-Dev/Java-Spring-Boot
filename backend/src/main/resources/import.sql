@@ -78,7 +78,8 @@ INSERT INTO tb_payment (order_id, state) VALUES (3, 1);
 INSERT INTO tb_payment_with_card (number_of_installments, order_id) VALUES (2, 3);
 
 
-INSERT INTO tb_item_order (order_id, product_id, discount, quantity, price) VALUES (1, 1, 0.0 , 2, 49.90);
+INSERT INTO tb_item_order (order_id, product_id, discount, quantity, price) VALUES (1, 1, 0.0 , 2, 90.0);
+INSERT INTO tb_item_order (order_id, product_id, discount, quantity, price) VALUES (1, 2, 10.0 , 1, 70.0);
 
 
 

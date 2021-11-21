@@ -18,23 +18,28 @@ public class ItemOrderDTO implements Serializable {
 	private Double discount;
 	private Integer quantity;
 	private Double price;
-	
-	private ProductDTO product;
+	private Long id;
+	private String name;
+	private Double priceDTO;
 
-	public ItemOrderDTO(Double discount, Integer quantity, Double price, ProductDTO product) {
+	public ItemOrderDTO(Double discount, Integer quantity, Double price, ProductDTO product, Long id, String name, Double PriceDTO) {
 		this.discount = discount;
 		this.quantity = quantity;
 		this.price = price;
-		this.product = product;
+		
+	}
+	
+	public Double getSubTotal() {
+		return (price - discount) * quantity;
 	}
 
 	public ItemOrderDTO(ItemOrder entity) {
 		discount = entity.getDiscount();
 		quantity = entity.getQuantity();
 		price = entity.getPrice();
-		product.setId(entity.getProduct().getId());
-		product.setName(entity.getProduct().getName());
-		product.setPrice(entity.getProduct().getPrice());
+	    id = entity.getProduct().getId();
+	    name = entity.getProduct().getName();
+	    priceDTO = entity.getProduct().getPrice();
 	
 	}
 	
@@ -62,15 +67,30 @@ public class ItemOrderDTO implements Serializable {
 		this.price = price;
 	}
 
-	public ProductDTO getProduct() {
-		return product;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProduct(ProductDTO product) {
-		this.product = product;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getPriceDTO() {
+		return priceDTO;
+	}
+
+	public void setPriceDTO(Double priceDTO) {
+		this.priceDTO = priceDTO;
+	}
+
 	
 	
 	
