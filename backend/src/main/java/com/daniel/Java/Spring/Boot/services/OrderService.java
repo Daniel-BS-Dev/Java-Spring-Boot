@@ -16,7 +16,6 @@ import com.daniel.Java.Spring.Boot.dto.OrderDTO;
 import com.daniel.Java.Spring.Boot.entities.ItemOrder;
 import com.daniel.Java.Spring.Boot.entities.Order;
 import com.daniel.Java.Spring.Boot.entities.PaymentWithBankSlip;
-import com.daniel.Java.Spring.Boot.entities.Product;
 import com.daniel.Java.Spring.Boot.enums.StatePayment;
 import com.daniel.Java.Spring.Boot.repositories.ItemOrderRepository;
 import com.daniel.Java.Spring.Boot.repositories.OrderRepository;
@@ -69,9 +68,7 @@ public class OrderService {
 		
 		for(ItemOrder o : entity.getItemOrder()){
 			o.setDiscount(0.0);
-			//Optional<Product> obj = productRepository.findById(o.getProduct().getId());
-			Product prod = productRepository.getById(o.getProduct().getId());
-			o.setPrice(prod.getPrice());
+			o.setPrice(productRepository.getById(o.getProduct().getId()).getPrice());
 			o.setOrder(entity);
 		}
 		
