@@ -12,10 +12,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.daniel.Java.Spring.Boot.enums.StatePayment;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Table(name="tb_payment")
 @Inheritance(strategy= InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")// essa anotação serve pra adicionar um campo a minha sub classe para indentificar ela
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

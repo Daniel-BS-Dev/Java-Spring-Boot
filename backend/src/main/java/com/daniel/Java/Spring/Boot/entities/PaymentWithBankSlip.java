@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.daniel.Java.Spring.Boot.enums.StatePayment;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
 @Table(name="tb_payment_with_bank_slip")
+@JsonTypeName("pagamentoComBoleto") // notação que indentifica o meu pagamento
 public class PaymentWithBankSlip extends Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

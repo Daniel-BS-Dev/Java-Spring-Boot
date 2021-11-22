@@ -39,12 +39,12 @@ public class ItemOrder implements Serializable {
 		return id.getProduct();
 	}
 
-	public ItemOrderPk getId() {
-		return id;
+	public void setId(Product product) {
+		id.setProduct(product);
 	}
 
-	public void setId(ItemOrderPk id) {
-		this.id = id;
+	public void setOrder(Order order) {
+		id.setOrder(order);
 	}
 
 	public Double getDiscount() {

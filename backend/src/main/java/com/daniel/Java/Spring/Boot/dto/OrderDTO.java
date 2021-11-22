@@ -60,7 +60,7 @@ public class OrderDTO implements Serializable {
 	   this(entity);
 	   products.forEach(x -> this.products.add(new ItemOrderDTO(x)));
 	}
-	
+
 	public Double getTotalValue() {
 		double sum = 0.0;
 		for(ItemOrderDTO x: products) {
@@ -68,6 +68,8 @@ public class OrderDTO implements Serializable {
 		}
 		return sum;
 	}
+	
+	
 
 	public List<ItemOrderDTO> getProducts() {
 		return products;

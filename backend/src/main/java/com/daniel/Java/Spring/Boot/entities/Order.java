@@ -2,6 +2,7 @@ package com.daniel.Java.Spring.Boot.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
